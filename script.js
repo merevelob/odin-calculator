@@ -1,17 +1,20 @@
 // 1. Basic functions
 
-function add(a, b) {
-    return a + b;
-}
+const operations = {
+    '+': (a, b) => a + b,
+    '-': (a, b) => a - b,
+    '*': (a, b) => a * b,
+    '/': (a, b) => a / b,
+};
 
-function subtract(a, b) {
-    return a - b;
-}
+// 2. Operation variables
 
-function multiply(a, b) {
-    return a * b;
-}
+let num1;
+let num2;
+let operator;
 
-function divide(a, b) {
-    return a / b;
+// 3. function operate()
+
+function operate(operator, num1, num2) {
+    return operations[operator](num1, num2);
 }
