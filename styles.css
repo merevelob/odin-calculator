@@ -32,6 +32,7 @@ body {
     aspect-ratio: 1 / 1;
     margin: auto;
     padding: 8px;
+    border: 1px solid #333333;
     border-radius: 8px;
     background-color: #444444;
 }
@@ -45,6 +46,7 @@ body {
 .title > h1 {
     font-family: 'vipna';
     font-size: x-large;
+    color: #111111;
     margin: auto;
 }
 /**/
@@ -52,7 +54,8 @@ body {
     height: 100px;
     width: 100%;
     margin-bottom: 8px;
-    background-color: #222222;
+    border: 1px solid #090909;
+    background-color: #111111;
 }
 /**/
 .buttons {
@@ -60,12 +63,25 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: yellow;
 }
 
 .buttons button {
-    width: 66px;
+    min-width: 65px;
+    flex: 1;
+    border-radius: 4px;
+    border: 1px solid #181818;
+    box-shadow: inset 1px 1px 8px 1px #2b2b2b;
+    font-family: 'vipna';
+    background-color: #222222;
+    color: ghostwhite;
+}
 
+.buttons button:hover {
+    background-color: #2b2b2b;
+}
+
+.buttons button:active {
+    background-color: #333333;
 }
 
 .digits {
@@ -73,7 +89,6 @@ body {
     width: 60%;
     display: flex;
     flex-wrap: wrap;
-    background-color: purple;
 }
 
 .operators {
@@ -81,4 +96,30 @@ body {
     width: 40%;
     display: flex;
     flex-wrap: wrap;
+}
+
+.operators > .clear {
+    background-color: darkred;
+    box-shadow: inset 1px 1px 8px 1px rgb(150, 0, 0);
+}
+
+.operators > .clear:hover {
+    background-color: rgb(155, 0, 0);
+}
+
+.operators > .clear:active {
+    background-color: rgb(175, 0, 0);
+}
+
+.operators > .equals {
+    background-color: darkblue;
+    box-shadow: inset 1px 1px 8px 1px rgb(0, 0, 150);
+}
+
+.operators > .equals:hover {
+    background-color: rgb(0, 0, 155);
+}
+
+.operators > .equals:active {
+    background-color: rgb(0, 0, 175);
 }
