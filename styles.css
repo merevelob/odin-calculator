@@ -1,0 +1,84 @@
+@font-face {
+    font-family: 'calculator';
+    src: url('./resources/Calculator.ttf');
+}
+
+@font-face {
+    font-family: 'vipna';
+    src: url('./resources/vipnagorgialla-rg.otf');
+}
+/**/
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+/**/
+body {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    background-color: silver;
+}
+/**/
+.calculator {
+    height: 350px;
+    aspect-ratio: 1 / 1;
+    margin: auto;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #444444;
+}
+/**/
+.title {
+    height: 42px;
+    margin-bottom: 8px;
+    display: flex;
+}
+
+.title > h1 {
+    font-family: 'vipna';
+    font-size: x-large;
+    margin: auto;
+}
+/**/
+.display {
+    height: 100px;
+    width: 100%;
+    margin-bottom: 8px;
+    background-color: #222222;
+}
+/**/
+.buttons {
+    height: 175px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: yellow;
+}
+
+.buttons button {
+    width: 66px;
+
+}
+
+.digits {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: purple;
+}
+
+.operators {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+}
