@@ -74,11 +74,11 @@ function storeNum2() {
 }
 
 function displaySolution(event) {
-    if (event.type === 'click' || event.key === 'Enter') {
+    if (moreValuesRegex.test(display.value) && (event.type === 'click' || event.key === 'Enter')) {
         storeNum2();
         display.value = roundLongDecimals(operate(operator, num1, num2));
-        display.focus();
     }
+    display.focus();
 }
 
 const equals = document.querySelector('.equals');
