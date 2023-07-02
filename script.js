@@ -96,3 +96,13 @@ function roundLongDecimals(num) {
     }
     return num;
 }
+
+// Clear display
+
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', clearDisplay)
+
+function clearDisplay() {
+    display.value = '';
+    display.focus();
+}
