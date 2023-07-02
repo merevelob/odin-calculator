@@ -48,7 +48,7 @@ function storeValues(event) {
         } else if (moreValuesRegex.test(display.value)) {
             storeNum2();
             const secondOperator = display.value.slice(-1);
-            const newNum1 = operate(operator, num1, num2);
+            const newNum1 = roundLongDecimals(operate(operator, num1, num2));
             num1 = newNum1;
             operator = secondOperator;
             display.value = newNum1 + secondOperator;
@@ -76,7 +76,7 @@ function storeNum2() {
 function displaySolution(event) {
     if (event.type === 'click' || event.key === 'Enter') {
         storeNum2();
-        display.value = operate(operator, num1, num2);
+        display.value = roundLongDecimals(operate(operator, num1, num2));
         display.focus();
     }
 }
@@ -85,3 +85,14 @@ const equals = document.querySelector('.equals');
 
 equals.addEventListener('click', displaySolution);
 display.addEventListener('keydown', displaySolution);
+
+// Round long decimals
+
+function roundLongDecimals(num) {
+    if (!Number.isInteger(num)) {
+        const decimalIndex = num.toString().indexOf('.');
+        const decimals = num.toString().slice(decimalIndex + 1).length;
+        num = num.toFixed(Math.min(decimals, 9));
+    }
+    return num;
+}
