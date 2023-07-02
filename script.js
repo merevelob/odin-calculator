@@ -26,6 +26,7 @@ const buttons = document.querySelectorAll('.toDisplay');
 
 function populateDisplay(event) {
     display.value += event.target.value;
+    clearError();
     display.focus();
 }
 
@@ -41,17 +42,21 @@ const moreValuesRegex = /^\d+[-+*/]\d+/;
 function storeValues(event) {
     if (event.type === 'click' || Object.keys(operations).includes(event.key)) {
         if (oneValueRegex.test(display.value)) {
-            num1 = +(display.value).slice(0, -1);
+            num1 = +display.value.slice(0, -1);
             console.log(num1);
             operator = display.value.slice(-1);
             console.log(operator);
         } else if (moreValuesRegex.test(display.value)) {
             storeNum2();
-            const secondOperator = display.value.slice(-1);
-            const newNum1 = roundLongDecimals(operate(operator, num1, num2));
-            num1 = newNum1;
-            operator = secondOperator;
-            display.value = newNum1 + secondOperator;
+            if (!divisionZero()) {
+                const secondOperator = display.value.slice(-1);
+                const newNum1 = roundLongDecimals(operate(operator, num1, num2));
+                num1 = newNum1;
+                operator = secondOperator;
+                display.value = newNum1 + secondOperator;
+            } else {
+                display.value = display.value.slice(0, -1);
+            }
             display.focus();
         }
     }  
@@ -76,7 +81,9 @@ function storeNum2() {
 function displaySolution(event) {
     if (moreValuesRegex.test(display.value) && (event.type === 'click' || event.key === 'Enter')) {
         storeNum2();
-        display.value = roundLongDecimals(operate(operator, num1, num2));
+        if (!divisionZero()) {
+            display.value = roundLongDecimals(operate(operator, num1, num2));
+        }
     }
     display.focus();
 }
@@ -104,5 +111,24 @@ clear.addEventListener('click', clearDisplay)
 
 function clearDisplay() {
     display.value = '';
+    clearError();
     display.focus();
+}
+
+// Handle division by zero
+
+const error = document.querySelector('.error');
+display.addEventListener('input', clearError);
+
+function divisionZero() {
+    if (operator === '/' && num2 === 0) {
+        error.textContent = 'Division by zero is undefined';
+        return true;
+    } else return false;
+}
+
+function clearError() {
+    if(error.textContent) {
+        error.textContent = '';
+    }
 }

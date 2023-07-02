@@ -62,14 +62,18 @@ body {
 .input {
     width: 100%;
     background-color: transparent;
-    /* color: rgb(40, 175, 0); */
     color: ghostwhite;
     outline: none;
-    margin-top: 16px;
+    margin: 16px 0;
     border: none;
     font-family: 'calculator';
     font-size: xx-large;
-    /* font-weight: bold; */
+    text-align: end;
+}
+
+.error {
+    font-family: 'calculator';
+    color: ghostwhite;
     text-align: end;
 }
 /**/
