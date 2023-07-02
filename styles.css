@@ -54,8 +54,23 @@ body {
     height: 100px;
     width: 100%;
     margin-bottom: 8px;
+    /* padding: 1px; */
     border: 1px solid #090909;
     background-color: #111111;
+}
+
+.input {
+    width: 100%;
+    background-color: transparent;
+    /* color: rgb(40, 175, 0); */
+    color: ghostwhite;
+    outline: none;
+    margin-top: 16px;
+    border: none;
+    font-family: 'calculator';
+    font-size: xx-large;
+    /* font-weight: bold; */
+    text-align: end;
 }
 /**/
 .buttons {
