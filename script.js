@@ -36,8 +36,8 @@ buttons.forEach(button => {
 
 // 6. Make the calculator work
 
-const oneValueRegex = /^\d+[-+*/]$/;
-const moreValuesRegex = /^\d+[-+*/]\d+/;
+const oneValueRegex = /^\d+\.?\d*[-+*/]$/;
+const moreValuesRegex = /^\d+\.?\d*[-+*/]\d+\.?\d*/;
 
 function storeValues(event) {
     if (event.type === 'click' || Object.keys(operations).includes(event.key)) {
@@ -73,8 +73,10 @@ display.addEventListener('keyup', storeValues);
 
 // Save num2, and display solution
 
+const num2Regex = /(?<=\d+\.?\d*[-+*/])\d+\.?\d*(?=[-+*/]?)/;
+
 function storeNum2() {
-    num2 = +display.value.match(/(?<=\d+[-+*/])\d+(?=[-+*/]?)/);
+    num2 = +display.value.match(num2Regex);
     console.log(num2);
 }
 
@@ -132,3 +134,25 @@ function clearError() {
         error.textContent = '';
     }
 }
+
+// Limit decimal point
+
+function displayDot(event) {
+    const num1HasDot = /\./.test(display.value);
+    const num2HasDot = /\./.test((display.value).match(num2Regex));
+    const oneValueDotRegex = /^\d+\.?\d*$/;
+    const oneValue = oneValueDotRegex.test(display.value);
+    const moreValues = moreValuesRegex.test(display.value);
+    if (event.type === 'click' && ((oneValue && !num1HasDot) || (moreValues && !num2HasDot))) {
+        populateDisplay(event);
+    } else if (event.key === '.' && ((oneValue && num1HasDot) || (moreValues && num2HasDot))) {
+        event.preventDefault();
+        // display.value = display.value.slice(0, -1);
+    }
+    display.focus();
+}
+
+const dot = document.querySelector('.dot');
+
+dot.addEventListener('click', displayDot);
+display.addEventListener('keydown', displayDot);
