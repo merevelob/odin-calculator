@@ -118,7 +118,7 @@ function roundLongDecimals(num) {
     if (!Number.isInteger(num)) {
         const decimalIndex = num.toString().indexOf('.');
         const decimals = num.toString().slice(decimalIndex + 1).length;
-        num = num.toFixed(Math.min(decimals, 9));
+        num = +num.toFixed(Math.min(decimals, 9));
     }
     return num;
 }
@@ -171,3 +171,14 @@ const dot = document.querySelector('.dot');
 
 dot.addEventListener('click', displayDot);
 display.addEventListener('keydown', displayDot);
+
+// 'Backspace' button
+
+function deleteOne() {
+    display.value = display.value.slice(0, -1);
+    clearError();
+    display.focus();
+}
+
+const backspace = document.querySelector('.del');
+backspace.addEventListener('click', deleteOne);
