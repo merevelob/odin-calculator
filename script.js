@@ -36,40 +36,58 @@ buttons.forEach(button => {
 
 // 6. Make the calculator work
 
-const oneValueRegex = /^\d+\.?\d*[-+*/]$/;
+const oneValueRegex = /^\d+\.?\d*[-+*/]?$/;
 const moreValuesRegex = /^\d+\.?\d*[-+*/]\d+\.?\d*/;
 
 function storeValues(event) {
-    if (event.type === 'click' || Object.keys(operations).includes(event.key)) {
+    if (oneValueRegex.test(display.value)) {
+        num1 = +display.value.slice(0, -1);
+        operator = event.target.value;
+    } else if (moreValuesRegex.test(display.value)) {
+        storeNum2();
+        if (!divisionZero()) {
+            const secondOperator = event.target.value;
+            const newNum1 = roundLongDecimals(operate(operator, num1, num2));
+            num1 = newNum1;
+            operator = secondOperator;
+            display.value = newNum1 + secondOperator;
+        } else {
+            display.value = display.value.slice(0, -1);    
+        } 
+    }
+    display.focus();
+}
+
+function storeValuesKeydown(event) {
+    if (Object.keys(operations).includes(event.key)) {
         if (oneValueRegex.test(display.value)) {
-            num1 = +display.value.slice(0, -1);
-            console.log(num1);
-            operator = display.value.slice(-1);
-            console.log(operator);
+            num1 = +display.value;
+            operator = event.key;
         } else if (moreValuesRegex.test(display.value)) {
             storeNum2();
             if (!divisionZero()) {
-                const secondOperator = display.value.slice(-1);
+                const secondOperator = event.key;
                 const newNum1 = roundLongDecimals(operate(operator, num1, num2));
                 num1 = newNum1;
                 operator = secondOperator;
-                display.value = newNum1 + secondOperator;
+                display.value = newNum1;
             } else {
-                display.value = display.value.slice(0, -1);
-            }
-            display.focus();
+                event.preventDefault();
+            }    
+        display.focus();
         }
     }  
 }
 
 // Save num1 and operator
+
 const operators = document.querySelectorAll('.operators > .toDisplay');
 
 operators.forEach(operator => {
     operator.addEventListener('click', storeValues);
 });
 
-display.addEventListener('keyup', storeValues);
+display.addEventListener('keydown', storeValuesKeydown);
 
 // Save num2, and display solution
 
@@ -77,7 +95,6 @@ const num2Regex = /(?<=\d+\.?\d*[-+*/])\d+\.?\d*(?=[-+*/]?)/;
 
 function storeNum2() {
     num2 = +display.value.match(num2Regex);
-    console.log(num2);
 }
 
 function displaySolution(event) {
@@ -140,14 +157,12 @@ function clearError() {
 function displayDot(event) {
     const num1HasDot = /\./.test(display.value);
     const num2HasDot = /\./.test((display.value).match(num2Regex));
-    const oneValueDotRegex = /^\d+\.?\d*$/;
-    const oneValue = oneValueDotRegex.test(display.value);
+    const oneValue = oneValueRegex.test(display.value);
     const moreValues = moreValuesRegex.test(display.value);
     if (event.type === 'click' && ((oneValue && !num1HasDot) || (moreValues && !num2HasDot))) {
         populateDisplay(event);
     } else if (event.key === '.' && ((oneValue && num1HasDot) || (moreValues && num2HasDot))) {
         event.preventDefault();
-        // display.value = display.value.slice(0, -1);
     }
     display.focus();
 }
