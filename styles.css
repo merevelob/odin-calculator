@@ -117,20 +117,24 @@ body {
     flex-wrap: wrap;
 }
 
-.operators > .clear {
+.operators > .clear,
+.operators > .del {
     background-color: darkred;
     box-shadow: inset 1px 1px 8px 1px rgb(150, 0, 0);
 }
 
-.operators > .clear:hover {
+.operators > .clear:hover,
+.operators > .del:hover {
     background-color: rgb(155, 0, 0);
 }
 
-.operators > .clear:active {
+.operators > .clear:active,
+.operators > .del:active {
     background-color: rgb(175, 0, 0);
 }
 
 .operators > .equals {
+    font-weight: bold;
     background-color: darkblue;
     box-shadow: inset 1px 1px 8px 1px rgb(0, 0, 150);
 }
@@ -141,4 +145,19 @@ body {
 
 .operators > .equals:active {
     background-color: rgb(0, 0, 175);
+}
+
+.operators > .toDisplay {
+    font-weight: bold;
+    color: #111111;
+    background-color: rgb(215, 120, 0);
+    box-shadow: inset 1px 1px 8px 1px rgb(230, 120, 0);
+}
+
+.operators > .toDisplay:hover {
+    background-color: rgb(235, 130, 0);
+}
+
+.operators > .toDisplay:active {
+    background-color: darkorange;
 }
