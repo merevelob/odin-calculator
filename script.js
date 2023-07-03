@@ -182,3 +182,15 @@ function deleteOne() {
 
 const backspace = document.querySelector('.del');
 backspace.addEventListener('click', deleteOne);
+
+// 'Palette' button to change body bgcolor
+
+function changeBgColor() {
+    const colours = ['azure', 'black', 'cadetblue', 'darkolivegreen', 'darkslategrey', 'lightgrey', 'lightslategrey', 'rosybrown', 'slategrey', 'thistle', 'grey'];
+    const randomIndex = Math.floor(Math.random() * colours.length);
+    document.body.style.backgroundColor = colours[randomIndex];
+    display.focus();
+}
+
+const palette = document.querySelector('.palette');
+palette.addEventListener('click', changeBgColor);

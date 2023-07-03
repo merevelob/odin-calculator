@@ -47,6 +47,7 @@ body {
     font-family: 'vipna';
     font-size: x-large;
     color: #111111;
+    text-shadow: 0px 0px 0.3rem silver;
     margin: auto;
 }
 /**/
@@ -54,7 +55,7 @@ body {
     height: 100px;
     width: 100%;
     margin-bottom: 8px;
-    /* padding: 1px; */
+    border-radius: 4px;
     border: 1px solid #090909;
     background-color: #111111;
 }
@@ -109,7 +110,7 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
-
+/**/
 .operators {
     height: 100%;
     width: 40%;
