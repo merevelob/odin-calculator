@@ -112,13 +112,13 @@ const equals = document.querySelector('.equals');
 equals.addEventListener('click', displaySolution);
 display.addEventListener('keydown', displaySolution);
 
-// Round long decimals
+// Round long decimals (5 max)
 
 function roundLongDecimals(num) {
     if (!Number.isInteger(num)) {
         const decimalIndex = num.toString().indexOf('.');
         const decimals = num.toString().slice(decimalIndex + 1).length;
-        num = +num.toFixed(Math.min(decimals, 9));
+        num = +num.toFixed(Math.min(decimals, 5));
     }
     return num;
 }
